@@ -3,20 +3,34 @@
   "version": "0.0.1",
   "description": "Test work for even-on-sunday.com.",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "dev": "parallelshell 'npm run build:dev' 'npm run serve'",
+    "prod": "parallelshell 'npm run build:prod' 'npm run serve'",
+    "build:dev": "gulp dev",
+    "build:prod": "gulp prod",
+    "serve": "nodemon server.js"
+  },
   "author": "Marco Schaule",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "parallelshell": "^2.0.0"
   },
   "devDependencies": {
+    "del": "^2.2.2",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^4.0.0",
+    "gulp-concat": "^2.6.1",
     "gulp-cssnano": "^2.1.2",
+    "gulp-htmlmin": "^3.0.0",
     "gulp-less": "^3.3.0",
+    "gulp-livereload": "^3.8.1",
+    "gulp-nodemon": "^2.2.1",
     "gulp-twig": "^0.7.0",
     "gulp-uglify": "^2.1.2",
     "less": "^2.7.2",
+    "nodemon": "^1.11.0",
+    "run-sequence": "^1.2.2",
     "twig": "^1.10.4"
   }
 }

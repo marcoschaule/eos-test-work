@@ -1,13 +1,14 @@
 <html>
 <head>
-  {% block head %}
-    <base href="/">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
-    <title>{% block title %}{% endblock %} - Even On Sunday // Probearbeit // Marco Schaule</title>
-  {% endblock %}
+  <base href="/">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">  
+  <title>{% block title %}{% endblock %} - Even On Sunday // Probearbeit // Marco Schaule</title>
+
+  {% for strPathAndFileName in mixFilesStyle %}
+  <link href="/{{strPathAndFileName}}" rel="stylesheet">
+  {% endfor %}
 </head>
 <body>
   {% block header %}
@@ -18,5 +19,9 @@
 
   {% block footer %}
   {% endblock %}
+
+  {% for strPathAndFileName in mixFilesScript %}
+  <script type="text/javascript" src="/{{strPathAndFileName}}"></script> 
+  {% endfor %}
 </body>
 </html>

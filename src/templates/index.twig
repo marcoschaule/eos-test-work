@@ -1,4 +1,4 @@
-{% extends "_layout.html" %}
+{% extends "_layout.twig" %}
 
 <!-- head extensions -->
 {% block title %}Index{% endblock %}
@@ -9,6 +9,7 @@
 
 <!-- body extensions -->
 {% block header %}
+    <h4>Some header</h4>
 {% endblock %}
 
 {% block content %}
@@ -19,4 +20,5 @@
 {% endblock %}
 
 {% block header %}
+    <h4>Some footer</h4>
 {% endblock %}
