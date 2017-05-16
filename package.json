@@ -1,0 +1,19 @@
+{
+  "name": "eos-test-work",
+  "version": "0.0.1",
+  "description": "Test work for even-on-sunday.com.",
+  "main": "index.js",
+  "scripts": {
+  },
+  "author": "Marco Schaule",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.2",
+    "gulp": "^3.9.1"
+  },
+  "devDependencies": {
+    "less": "^2.7.2",
+    "prefixer": "0.0.3",
+    "twig": "^1.10.4"
+  }
+}
