@@ -5,16 +5,13 @@
 1. Clone repository with `git clone https://github.com/marcoschaule/eos-test-work.git`.
 1. Install dependencies with `npm install`.
 1. To build the `development` environment, use:
-
-  ```bash
-  $ npm run dev
-  ```
-
+    ```
+    $ npm run dev
+    ```
 1. To build the `production` environment, use:
-
-  ```bash
-  $ npm run prod
-  ```
+    ```
+    $ npm run prod
+    ```
 
 ## Done
 
