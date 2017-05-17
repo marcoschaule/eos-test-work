@@ -31,7 +31,6 @@ const _strPathAssets          = './assets';
 const _strPathNodeModules     = './node_modules';
 const _strFileNameStylesProd  = 'styles.min.js';
 const _strFileNameScriptsProd = 'scripts.min.js';
-const _objLiveReload          = { port: 9091, host: '0.0.0.0' };
 
 // array of style files in the expected order
 const _arrFilesStyleDev = [
@@ -235,7 +234,6 @@ gulp.task('watch:dev', _watchDev);
  * @private
  */
 function _watchProd() {
-  livereload.listen();
   gulp.watch(`${_strPathSrc}/**/*.less`,   ['styles:prod']);
   gulp.watch(`${_strPathSrc}/**/*.js`,     ['scripts:prod']);
   gulp.watch(`${_strPathSrc}/**/*.twig`,   ['templates:prod']);
