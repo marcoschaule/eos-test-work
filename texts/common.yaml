@@ -1,6 +1,11 @@
 head:
   titlePage: Index
   titleMain: Even On Sunday // Probearbeit // Marco Schaule
+  meta:
+    author: Marco Schaule
+    description: Even On Sunday Test Project
+    keywords: Fashion, Responsive, Frontend
+    date: 2017-05-17T14:00:00+300
 header:
   title: Falke For Liberty
 keyvisual:
