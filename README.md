@@ -20,10 +20,18 @@
 * Setup server to provide site.
 * Implement site.
 * Implement fluid responsive behavior.
+* Tested cloning repo in different folder on Mac.
+* Tested on Firefox.
+* Tested on Chrome.
+* Tested on Safari.
+* Tested on IE11 in Windows 7 (Virtual Box).
 
-## To Do
+## Possible further todos
 
-* Test in Windows.
-* Test in Internet Explorer 10.
+* Tested on IE10/IE11 in Windows 8/10 (Virtual Box).
+* Tested cloning repo in different folder on Windows.
+* Tested cloning repo in different folder on Linux.
 * Improve Responsiveness.
 * Fix text line height in "Liberty" part.
+* Add w3c HTML and CSS linter.
+* etc.
