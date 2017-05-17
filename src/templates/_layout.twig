@@ -4,24 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">  
-  <title>{% block title %}{% endblock %} - Even On Sunday // Probearbeit // Marco Schaule</title>
+  <title>{{texts.head.titlePage}} - {{texts.head.titleMain}}</title>
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet"> 
 
   {% for strPathAndFileName in mixFilesStyle %}
   <link href="/{{strPathAndFileName}}" rel="stylesheet">
   {% endfor %}
 </head>
 <body>
-  {% block header %}
-  {% endblock %}
+  <div id="eos-wrapper">
+    <header>
+      {% block header %}{% endblock %}
+    </header>
 
-  {% block content %}
-  {% endblock %}
+    <main>
+      {% block main %}{% endblock %}
+    </main>
 
-  {% block footer %}
-  {% endblock %}
+    <footer>
+      {% block footer %}{% endblock %}
+    </footer>
 
-  {% for strPathAndFileName in mixFilesScript %}
-  <script type="text/javascript" src="/{{strPathAndFileName}}"></script> 
-  {% endfor %}
+    {% for strPathAndFileName in mixFilesScript %}
+    <script type="text/javascript" src="/{{strPathAndFileName}}"></script> 
+    {% endfor %}
+  </div>
 </body>
 </html>

@@ -5,8 +5,10 @@
 // Imports
 // *****************************************************************************
 
+const fs              = require('fs');
 const del             = require('del');
 const path            = require('path');
+const yaml            = require('js-yaml');
 const runSequence     = require('run-sequence');
 const gulp            = require('gulp');
 const concat          = require('gulp-concat');
@@ -17,7 +19,6 @@ const autoprefixer    = require('gulp-autoprefixer');
 const uglify          = require('gulp-uglify');
 const cssnano         = require('gulp-cssnano');
 const nodemon         = require('gulp-nodemon');
-const livereload      = require('gulp-livereload');
 
 // *****************************************************************************
 // Locals
@@ -25,21 +26,25 @@ const livereload      = require('gulp-livereload');
 
 const _strPathSrc             = './src';
 const _strPathDist            = './dist';
+const _strPathTexts           = './texts';
 const _strPathAssets          = './assets';
+const _strPathNodeModules     = './node_modules';
 const _strFileNameStylesProd  = 'styles.min.js';
 const _strFileNameScriptsProd = 'scripts.min.js';
 const _objLiveReload          = { port: 9091, host: '0.0.0.0' };
 
 // array of style files in the expected order
 const _arrFilesStyleDev = [
-  'styles/common.less',
-  'styles/hacks.less',
+  `${_strPathNodeModules}/normalize.css/normalize.css`,
+  `${_strPathSrc}/styles/common.less`,
+  `${_strPathSrc}/styles/hacks.less`,
 ];
 
 // array of script files in the expected order
 const _arrFilesScriptDev = [
-  'scripts/common.js',
+  `${_strPathSrc}/scripts/common.js`,
 ];
+
 
 // *****************************************************************************
 // Tasks
@@ -51,7 +56,7 @@ gulp.task('clean', _clean);
 // development task
 gulp.task('dev', callback => runSequence(
   ['clean'],
-  ['templates:dev',  'styles:dev',  'scripts:dev'],
+  ['templates:dev', 'styles:dev', 'scripts:dev'],
   ['assets'],
   ['watch:dev'],
   callback));
@@ -85,16 +90,17 @@ function _clean() {
  * @private
  */
 function _templatesDev() {
-  const objData = { data: {
+  const objTexts_u = yaml.safeLoad(fs.readFileSync(`${_strPathTexts}/common.yaml`));
+  const objData    = { data: {
     mixFilesStyle : _arrFilesStyleDev.map(_renameLessFile),
     mixFilesScript: _arrFilesScriptDev,
+    texts         : objTexts_u,
   } };
 
   return gulp
     .src(`${_strPathSrc}/templates/**/[^_]*.twig`)
     .pipe(twig(objData))
     .pipe(gulp.dest(_strPathDist))
-    .pipe(livereload(_objLiveReload))
     ;
 }
 gulp.task('templates:dev', _templatesDev);
@@ -107,9 +113,11 @@ gulp.task('templates:dev', _templatesDev);
  * @private
  */
 function _templatesProd() {
-  const objData = { data: {
+  const objTexts_u = yaml.safeLoad(fs.readFileSync(`${_strPathTexts}/common.yaml`));
+  const objData    = { data: {
     mixFilesStyle : [_strFileNameStylesProd],
     mixFilesScript: [_strFileNameScriptsProd],
+    texts         : objTexts_u,
   } };
 
   return gulp
@@ -117,7 +125,6 @@ function _templatesProd() {
     .pipe(twig(objData))
     .pipe(htmlmin({ collapseWhitespace: true }))
     .pipe(gulp.dest(_strPathDist))
-    .pipe(livereload(_objLiveReload))
     ;
 }
 gulp.task('templates:prod', _templatesProd);
@@ -131,11 +138,10 @@ gulp.task('templates:prod', _templatesProd);
  */
 function _stylesDev() {
   return gulp
-    .src(_arrFilesStyleDev.map(strFilePathName => `${_strPathSrc}/${strFilePathName}`))
+    .src(_arrFilesStyleDev)
     .pipe(less())
     .pipe(autoprefixer({ browsers: ['last 5 versions'], cascade: false }))
     .pipe(gulp.dest(`${_strPathDist}/styles`))
-    .pipe(livereload(_objLiveReload))
     ;
 }
 gulp.task('styles:dev', _stylesDev);
@@ -149,12 +155,11 @@ gulp.task('styles:dev', _stylesDev);
  */
 function _stylesProd() {
   return gulp
-    .src(_arrFilesStyleDev.map(strFilePathName => `${_strPathSrc}/${strFilePathName}`))
+    .src(_arrFilesStyleDev)
     .pipe(less())
     .pipe(autoprefixer({ browsers: ['last 5 versions'], cascade: false }))
     .pipe(concat('styles.min.js'), { newLine: '' })
     .pipe(gulp.dest(`${_strPathDist}`))
-    .pipe(livereload(_objLiveReload))
     ;
 }
 gulp.task('styles:prod', _stylesProd);
@@ -168,9 +173,8 @@ gulp.task('styles:prod', _stylesProd);
  */
 function _scriptsDev() {
   return gulp
-    .src(_arrFilesScriptDev.map(strFilePathName => `${_strPathSrc}/${strFilePathName}`))
+    .src(_arrFilesScriptDev)
     .pipe(gulp.dest(`${_strPathDist}/scripts`))
-    .pipe(livereload(_objLiveReload))
     ;
 }
 gulp.task('scripts:dev', _scriptsDev);
@@ -184,11 +188,10 @@ gulp.task('scripts:dev', _scriptsDev);
  */
 function _scriptsProd() {
   return gulp
-    .src(_arrFilesScriptDev.map(strFilePathName => `${_strPathSrc}/${strFilePathName}`))
+    .src(_arrFilesScriptDev)
     .pipe(uglify())
     .pipe(concat('scripts.min.js'), { newLine: '' })
     .pipe(gulp.dest(`${_strPathDist}`))
-    .pipe(livereload(_objLiveReload))
     ;
 }
 gulp.task('scripts:prod', _scriptsProd);
@@ -204,7 +207,6 @@ function _assets() {
   return gulp
     .src(`${_strPathAssets}/**`)
     .pipe(gulp.dest(`${_strPathDist}`))
-    .pipe(livereload(_objLiveReload))
     ;
 }
 gulp.task('assets', _assets);
@@ -217,11 +219,11 @@ gulp.task('assets', _assets);
  * @private
  */
 function _watchDev() {
-  livereload.listen();
-  gulp.watch(`${_strPathSrc}/styles/**/*.less`,    ['styles:dev']);
-  gulp.watch(`${_strPathSrc}/scripts/**/*.js`,     ['scripts:dev']);
-  gulp.watch(`${_strPathSrc}/templates/**/*.twig`, ['templates:dev']);
-  gulp.watch(`${_strPathAssets}/**/*.*`,           ['assets']);
+  gulp.watch(`${_strPathSrc}/**/*.less`,   ['styles:dev']);
+  gulp.watch(`${_strPathSrc}/**/*.js`,     ['scripts:dev']);
+  gulp.watch(`${_strPathSrc}/**/*.twig`,   ['templates:dev']);
+  gulp.watch(`${_strPathTexts}/**/*.yaml`, ['templates:dev']);
+  gulp.watch(`${_strPathAssets}/**/*.*`,   ['assets']);
 }
 gulp.task('watch:dev', _watchDev);
 
@@ -234,10 +236,11 @@ gulp.task('watch:dev', _watchDev);
  */
 function _watchProd() {
   livereload.listen();
-  gulp.watch(`${_strPathSrc}/styles/**/*.less`,    ['styles:prod']);
-  gulp.watch(`${_strPathSrc}/scripts/**/*.js`,     ['scripts:prod']);
-  gulp.watch(`${_strPathSrc}/templates/**/*.twig`, ['templates:prod']);
-  gulp.watch(`${_strPathAssets}/**/*.*`,           ['assets']);
+  gulp.watch(`${_strPathSrc}/**/*.less`,   ['styles:prod']);
+  gulp.watch(`${_strPathSrc}/**/*.js`,     ['scripts:prod']);
+  gulp.watch(`${_strPathSrc}/**/*.twig`,   ['templates:prod']);
+  gulp.watch(`${_strPathTexts}/**/*.yaml`, ['templates:prod']);
+  gulp.watch(`${_strPathAssets}/**/*.*`,   ['assets']);
 }
 gulp.task('watch:prod', _watchProd);
 
@@ -249,7 +252,9 @@ gulp.task('watch:prod', _watchProd);
  * @private
  */
 function _renameLessFile(strFileName) {
-  return strFileName.replace(/\.less$/, '.css');
+  strFileName = 'styles/' + path.basename(strFileName);
+  strFileName = strFileName.replace(path.extname(strFileName), '.css');
+  return strFileName;
 }
 
 // *****************************************************************************

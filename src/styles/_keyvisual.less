@@ -1,0 +1,78 @@
+// *****************************************************************************
+// Variables
+// *****************************************************************************
+
+@widthKeyvisualText     : 545px;
+@widthKeyvisualTextSmall: 348px;
+
+// *****************************************************************************
+// Keyvisual
+// *****************************************************************************
+
+#eos-keyvisual {
+  box-sizing: border-box;
+  height: 747px;
+  position: relative;
+}
+
+#eos-keyvisual .eos-keyvisual-title h2 {
+  font-size: 3rem;
+  font-weight: normal;
+  line-height: 1em;
+  text-transform: uppercase;
+}
+
+#eos-keyvisual .eos-keyvisual-text {
+  margin-bottom: 2rem;
+}
+
+#eos-keyvisual .eos-keyvisual-socks {
+  position: absolute;
+  z-index: -1;
+  height: auto;
+}
+
+@media only screen and (min-width: @widthMedium) {
+  #eos-keyvisual {
+    padding: 200px 0;
+  }
+  #eos-keyvisual .eos-keyvisual-socks {
+    right: -20%;
+    top: 18%;
+    width: auto;
+  }
+  #eos-keyvisual .eos-keyvisual-title h2 {
+    width: @widthKeyvisualText;
+  }
+  #eos-keyvisual .eos-keyvisual-text {
+    width: @widthKeyvisualText;
+  }
+}
+@media only screen and (max-width: (@widthMedium - 1px)) {
+  #eos-keyvisual {
+    padding: 0;
+  }
+  #eos-keyvisual .eos-keyvisual-socks {
+    bottom: -3%;
+    right: -30px - @vPaddingMedium;
+    width: 460px;
+  }
+  #eos-keyvisual .eos-keyvisual-title h2 {
+    width: @widthKeyvisualTextSmall;
+  }
+  #eos-keyvisual .eos-keyvisual-text {
+    width: @widthKeyvisualTextSmall;
+  }
+}
+@media only screen and (max-width: @widthSmall) {
+  #eos-keyvisual .eos-keyvisual-socks {
+    right: -30px - @vPaddingSmall;
+  }
+}
+@media only screen and (max-width: @widthExtraSmall) {
+  #eos-keyvisual .eos-keyvisual-socks {
+    right: -30px - @vPaddingExtraSmall;
+  }
+}
+
+// *****************************************************************************

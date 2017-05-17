@@ -1,4 +1,119 @@
-h1 {
-  color: blue;
-  font-size: 8rem;
+// *****************************************************************************
+// Imports
+// *****************************************************************************
+
+@import "_variables.less";
+@import "_header.less";
+@import "_keyvisual.less";
+@import "_banner.less";
+@import "_info.less";
+@import "_liberty.less";
+@import "_footer.less";
+
+// *****************************************************************************
+// Common tags
+// *****************************************************************************
+
+* {
+  font-family: @fontDefault;
+  font-weight: @fontWeightLight;
 }
+
+body, html {
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  line-height: 0;
+  margin: 0;
+  padding: 0;
+}
+
+h2 {
+  font-weight: @fontWeightRegular;
+}
+
+h3 {
+  font-size: 2.25rem;
+  font-weight: @fontWeightRegular;
+  letter-spacing: 6px;
+  text-transform: uppercase;  
+}
+
+p {
+  font-size: 1rem;
+  line-height: 1.8em;
+  letter-spacing: .5px;
+}
+
+a, a:hover, a:visited, a:focus {
+  color: inherit;
+  text-decoration: none;
+}
+
+// *****************************************************************************
+// Common classes
+// *****************************************************************************
+
+.hidden {
+  display: none !important;
+}
+
+.clear {
+  clear: both;
+}
+
+.button {
+  background: none;
+  border: 2px solid black;
+  font-weight: @fontWeightRegular;
+  padding: 20px 22px;
+  display: inline-block;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.button:hover {
+  border: 2px solid @colorLila;
+  background-color: @colorLila;
+  color: white;
+}
+
+// *****************************************************************************
+// Container
+// *****************************************************************************
+
+.eos-container {
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media only screen and (min-width: @widthMedium) {
+  .eos-container {
+    max-width: @widthLarge;
+    padding: 0 @vPaddingLarge;
+  }
+}
+@media only screen and (max-width: (@widthMedium - 1px)) {
+  .eos-container {
+    max-width: @widthMedium;
+    padding: 0 @vPaddingMedium;
+  }
+}
+@media only screen and (max-width: @widthSmall) {
+  .eos-container {
+    max-width: @widthSmall;
+    padding: 0 @vPaddingSmall;
+  }
+}
+@media only screen and (max-width: @widthExtraSmall) {
+  .eos-container {
+    max-width: @widthExtraSmall;
+    padding: 0 @vPaddingExtraSmall;
+  }
+}
+
+// *****************************************************************************

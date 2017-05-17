@@ -1,0 +1,66 @@
+// *****************************************************************************
+// Variables
+// *****************************************************************************
+
+@vDistance : 94px;
+@vDistance2: 80px;
+
+// *****************************************************************************
+// Liberty
+// *****************************************************************************
+
+#eos-liberty {
+  padding: @vDistance 0 120px 0;
+  background-color: @colorLila;
+}
+
+#eos-liberty * {
+  color: white;
+  text-align: center;
+}
+
+#eos-liberty .eos-liberty-logo {
+  margin-bottom: @vDistance;
+}
+
+#eos-liberty .eos-liberty-img-building {
+  max-width: 1160px;
+}
+
+#eos-liberty .eos-liberty-img-building img {
+  box-shadow: 0px 0px 40px -5px rgba(0,0,0,0.75);
+  margin-bottom: @vDistance2;
+  height: auto;
+  width: 100%;
+}
+
+#eos-liberty .eos-liberty-text p {
+  font-weight: @fontWeightLight;
+  margin: 0 0 2em 0;
+}
+
+@media only screen and (min-width: @widthSmall) {
+  #eos-liberty .eos-liberty-text {
+    column-count: 2;
+    column-gap: 3rem;
+  }
+  #eos-liberty .eos-liberty-text p {
+    text-align: justify;
+  }
+  #eos-liberty .eos-liberty-title {
+    margin-bottom: @vDistance2;
+  }
+}
+@media only screen and (max-width: (@widthSmall - 1px)) {
+  #eos-liberty .eos-liberty-text {
+    column-count: 1;
+  }
+  #eos-liberty .eos-liberty-text p {
+    text-align: center;
+  }
+  #eos-liberty .eos-liberty-title {
+    margin-bottom: 40px;
+  }
+}
+
+// *****************************************************************************

@@ -1,0 +1,29 @@
+// *****************************************************************************
+// Variables
+// *****************************************************************************
+
+@heightHeader    : 800px;
+@heightHeaderLogo: 254px;
+@paddingTopHeader: (@heightHeader - @heightHeaderLogo) / 2;
+
+// *****************************************************************************
+// Header
+// *****************************************************************************
+
+header {
+  background: url('../images/pattern.jpg') repeat 50% 50%;
+  height: @heightHeader;
+  padding-top: @paddingTopHeader;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#eos-header a#logo {
+  background: url('../images/logo-falke-for-liberty.png') no-repeat 50% 50% @colorLila;
+  display: block;
+  height: @heightHeaderLogo;
+  margin: 0 auto;
+  width: 430px;
+}
+
+// *****************************************************************************

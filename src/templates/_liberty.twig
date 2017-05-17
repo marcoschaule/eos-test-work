@@ -1,0 +1,18 @@
+<div id="eos-liberty">
+  <div class="eos-container">
+    <div class="eos-liberty-logo">
+      <img src="/images/logo-liberty-london.png" alt="{{ texts.liberty.title }}">
+    </div>
+    <div class="eos-liberty-img-building">
+      <img src="/images/img-liberty-building.jpg" alt="{{ texts.liberty.title }}">
+    </div>
+    <div class="eos-liberty-title">
+      <h3>{{ texts.liberty.title }}</h3>
+    </div>
+    <div class="eos-liberty-text">
+      {% for strText in texts.liberty.texts %}
+      <p>{{strText}}</p>
+      {% endfor %}
+    </div>
+  </div>
+</div>

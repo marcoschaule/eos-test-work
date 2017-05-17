@@ -1,24 +1,17 @@
 {% extends "_layout.twig" %}
 
-<!-- head extensions -->
-{% block title %}Index{% endblock %}
-
-{% block head %}
-    {{ parent() }}
-{% endblock %}
-
 <!-- body extensions -->
 {% block header %}
-    <h4>Some header</h4>
+    {% include '_header.twig' %}
 {% endblock %}
 
-{% block content %}
-    <h1>Index</h1>
-    <p class="important">
-        Welcome on my awesome homepage.
-    </p>
+{% block main %}
+    {% include '_keyvisual.twig' %}
+    {% include '_banner.twig' %}
+    {% include '_info.twig' %}
+    {% include '_liberty.twig' %}
 {% endblock %}
 
-{% block header %}
-    <h4>Some footer</h4>
+{% block footer %}
+    {% include '_footer.twig' %}
 {% endblock %}
